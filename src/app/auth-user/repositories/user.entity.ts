@@ -24,8 +24,11 @@ export class UserEntity {
     @Column({length: 200})
     email: string;
 
-    @Column({type: 'uuid'})
+    @Column()
     auth_ref_id: string;
+
+    @Column({type: 'uuid'})
+    auth_id: string;
 
     @Column()
     channel: string;

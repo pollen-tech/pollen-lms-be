@@ -22,7 +22,8 @@ export class CreateUserTables1720923244086 implements MigrationInterface {
                     phone_no       int                  default 0,
                     phone_verified boolean     not null DEFAULT false,
                     email          varchar(200),
-                    auth_ref_id    uuid,
+                    auth_ref_id    varchar(200),
+                    auth_id        uuid        not null,
                     channel        varchar(30) not null DEFAULT 'NA',
                     status         varchar(25) not null DEFAULT 'NA',
                     created_at     timestamp   not null DEFAULT now(),
@@ -31,8 +32,8 @@ export class CreateUserTables1720923244086 implements MigrationInterface {
                     createdAt      bigint      NOT NULL,
                     updateAt       bigint      NOT NULL,
                     deletedAt      bigint      NOT NULL,
-                    
-                    CONSTRAINT uq_ref_id_role UNIQUE (auth_ref_id, channel)
+
+                    CONSTRAINT uq_auth_id_channel UNIQUE (auth_id, channel)
                 );
             `
         )
