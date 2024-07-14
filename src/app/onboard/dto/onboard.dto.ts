@@ -11,7 +11,7 @@ export class OnboardCompanyReqDto {
     name: string;
 
     @IsNotEmpty()
-    company_type_id: string;
+    company_type_id: number;
 
     @IsNotEmpty()
     operation_country_id: number;

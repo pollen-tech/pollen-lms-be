@@ -10,8 +10,8 @@ export class CompanyEntity {
     @Column()
     name: string;
 
-    @Column({type: 'uuid'})
-    company_type_id: string;
+    @Column()
+    company_type_id: number;
 
     @Column()
     country_id: number;

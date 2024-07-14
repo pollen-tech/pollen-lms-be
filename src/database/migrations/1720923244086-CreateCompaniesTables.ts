@@ -67,7 +67,7 @@ export class CreateCompaniesTables1720923244086 implements MigrationInterface {
             `
                 CREATE TABLE company_user
                 (
-                    id         smallint primary key,
+                    id         uuid     DEFAULT uuid_generate_v4() primary key,
                     company_id uuid        NOT NULL,
                     user_id    uuid        NOT NULL,
                     status     varchar(25) not null DEFAULT 'NA',
