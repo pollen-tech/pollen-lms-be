@@ -8,6 +8,21 @@ export class CreateCompaniesTables1720923244086 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(
             `
+                CREATE TABLE country
+                (
+                    id         smallint primary key,
+                    name       varchar(100) NOT NULL,
+                    iso3       varchar(10)  NOT NULL,
+                    phone_code varchar(10)  NOT NULL,
+                    created_at timestamp without time zone NOT NULL DEFAULT now(),
+                    updated_at timestamp without time zone NOT NULL DEFAULT now(),
+                    status     varchar(25)  not null DEFAULT 'NA'
+                );
+            `,
+        );
+
+        await queryRunner.query(
+            `
                 CREATE TABLE company_type
                 (
                     id          smallint primary key,
@@ -42,7 +57,7 @@ export class CreateCompaniesTables1720923244086 implements MigrationInterface {
                     created_at        timestamp without time zone NOT NULL DEFAULT now(),
                     updated_at        timestamp without time zone NOT NULL DEFAULT now(),
                     deleted_at        timestamp without time zone,
-                    status            status varchar(25) not null DEFAULT 'NA',
+                    status            varchar(25) not null DEFAULT 'NA',
                     CONSTRAINT fk_company_company_type_id FOREIGN KEY (company_type_id) REFERENCES company_type (id),
                     CONSTRAINT fk_company_liquidate_unit_id FOREIGN KEY (liquidate_unit_id) REFERENCES liquidate_unit (id)
                 );

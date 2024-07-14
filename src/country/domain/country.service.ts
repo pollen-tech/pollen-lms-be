@@ -1,12 +1,7 @@
-import {
-  BadRequestException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
-import awaitToError from 'src/common/await-to-error';
-import { In } from 'typeorm';
-import { CityRepository } from '../infrastructure/repositories/city.repository';
-import { CountryRepository } from '../infrastructure/repositories/country.repository';
+import {Injectable,} from '@nestjs/common';
+import {In} from 'typeorm';
+import {CityRepository} from '../infrastructure/repositories/city.repository';
+import {CountryRepository} from '../infrastructure/repositories/country.repository';
 
 @Injectable()
 export class CountryService {
@@ -59,48 +54,4 @@ export class CountryService {
     return this.cityRepository.find({ where: { id: In(ids) } });
   }
 
-  async findCountryAndValidate(id: number, cityId?: number) {
-    const [err, country] = await awaitToError(this.findOneCountryById(id));
-    if (err) {
-      throw new NotFoundException(`Country not found`);
-    }
-
-    if (cityId) {
-      const doesEncompass = await this.cityRepository.existsBy({
-        country_id: country.id,
-        id: cityId,
-      });
-      if (!doesEncompass) {
-        throw new BadRequestException(`Country does not encompass City`);
-      }
-    }
-
-    return country;
-  }
-
-  async findCityAndValidate(cityId: number, countryId?: number) {
-    const [err, city] = await awaitToError(
-      this.cityRepository.findOneByOrFail({ id: cityId }),
-    );
-    if (err) {
-      throw new NotFoundException(`City not found`);
-    }
-
-    if (countryId && city.country_id !== countryId) {
-      throw new BadRequestException(`City is not located within Country`);
-    }
-
-    return city;
-  }
-
-  async findCurrencyAndValidate(currency: string) {
-    const [err, country] = await awaitToError(
-      this.countryRepository.findOneByOrFail({ currency: currency }),
-    );
-    if (err) {
-      throw new NotFoundException(`Currency not found`);
-    }
-
-    return country.currency;
-  }
 }
