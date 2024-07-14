@@ -6,31 +6,33 @@ import {DatabaseModule} from './database/database.module';
 import {HealthcheckModule} from './app/healthcheck/healthcheck.module';
 import {getKeycloakModule} from './keycloak/keycloak.module';
 import {UserModule} from "./app/auth-user/user.module";
+import {OnboardModule} from "./app/onboard/onboard.module";
 
 // export const getAppModules = () => [HealthcheckModule, CountryModule];
- export const getAppModules = () => [HealthcheckModule, UserModule];
+export const getAppModules = () => [HealthcheckModule, UserModule, OnboardModule];
 
 export const getInfraModules = () => [
-  DatabaseModule.forRoot(),
-  getKeycloakModule(),
+    DatabaseModule.forRoot(),
+    getKeycloakModule(),
 ];
 
 @Module({
-  imports: [CustomConfigModule, ...getInfraModules(), ...getAppModules()],
-  controllers: [],
-  providers: [
-    {
-      provide: APP_GUARD,
-      useClass: AuthGuard,
-    },
-    {
-      provide: APP_GUARD,
-      useClass: ResourceGuard,
-    },
-    {
-      provide: APP_GUARD,
-      useClass: RoleGuard,
-    },
-  ],
+    imports: [CustomConfigModule, ...getInfraModules(), ...getAppModules()],
+    controllers: [],
+    providers: [
+        {
+            provide: APP_GUARD,
+            useClass: AuthGuard,
+        },
+        {
+            provide: APP_GUARD,
+            useClass: ResourceGuard,
+        },
+        {
+            provide: APP_GUARD,
+            useClass: RoleGuard,
+        },
+    ],
 })
-export class AppModule {}
+export class AppModule {
+}
