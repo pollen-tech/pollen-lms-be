@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { SubregionEntity } from 'src/country/infrastructure/repositories/subregion.entity';
+import { SubregionEntity } from 'src/app/country/infrastructure/repositories/subregion.entity';
 import { DataSource } from 'typeorm';
 import { Seeder, SeederFactoryManager } from 'typeorm-extension';
 

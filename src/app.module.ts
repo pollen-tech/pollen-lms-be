@@ -7,9 +7,10 @@ import {HealthcheckModule} from './app/healthcheck/healthcheck.module';
 import {getKeycloakModule} from './keycloak/keycloak.module';
 import {UserModule} from "./app/auth-user/user.module";
 import {OnboardModule} from "./app/onboard/onboard.module";
+import {CountryModule} from "./app/country/country.module";
 
 // export const getAppModules = () => [HealthcheckModule, CountryModule];
-export const getAppModules = () => [HealthcheckModule, UserModule, OnboardModule];
+export const getAppModules = () => [HealthcheckModule, UserModule, OnboardModule,CountryModule];
 
 export const getInfraModules = () => [
     DatabaseModule.forRoot(),

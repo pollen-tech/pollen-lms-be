@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { StateEntity } from 'src/country/infrastructure/repositories/state.entity';
+import { StateEntity } from 'src/app/country/infrastructure/repositories/state.entity';
 import { DataSource } from 'typeorm';
 import { Seeder, SeederFactoryManager } from 'typeorm-extension';
 
