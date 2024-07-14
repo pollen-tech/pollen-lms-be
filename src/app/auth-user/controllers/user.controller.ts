@@ -18,7 +18,7 @@ export class UserController {
     }
 
     @Get(':user_id')
-    async findByUserId(@Param() user_id: string) {
+    async findByUserId(@Param('user_id') user_id: string) {
         return this.userService.findOneById(user_id);
     }
 

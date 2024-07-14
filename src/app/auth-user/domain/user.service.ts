@@ -9,7 +9,7 @@ export class UserService {
     }
 
     async findOneById(id: string) {
-        return this.userRepository.findOneByOrFail({id});
+        return this.userRepository.findOneByOrFail({id: id});
     }
 
 
