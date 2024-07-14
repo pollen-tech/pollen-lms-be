@@ -1,26 +1,56 @@
-import {IsArray, IsNotEmpty, IsUUID} from "class-validator";
+import {IsNotEmpty} from "class-validator";
+import {CompanyEntity} from "../repositories/company.entity";
+import {Optional} from "@nestjs/common";
+import {Status} from "../../../common/enums/common.enum";
 
-export class OnboardCompanyDto {
+export class OnboardCompanyReqDto {
 
-    @IsNotEmpty()
     id: string;
 
     @IsNotEmpty()
     name: string;
 
     @IsNotEmpty()
-    type: string;
+    company_type_id: string;
 
     @IsNotEmpty()
-    operation_country: string;
+    operation_country_id: number;
+
+    @Optional()
+    operation_country_name: string;
 
     @IsNotEmpty()
-    liquidate_monthly: string;
+    liquidate_unit_id: number;
 
-    @IsNotEmpty()
+    @Optional()
+    liquidate_unit_name: string;
+
+    @Optional()
     logo: string;
 
+    @IsNotEmpty()
+    user_id: string;
+
 }
+
+export class OnboardCompanyResDto extends OnboardCompanyReqDto {
+    id: string;
+}
+
+export class OnboardCompanyMapper {
+
+    static toCompanyEntity(req: OnboardCompanyReqDto) {
+        const entity = new CompanyEntity();
+        entity.id = req.id;
+        entity.name = req.name;
+        entity.company_type_id = req.company_type_id;
+        entity.country_id = req.operation_country_id;
+        entity.liquidate_unit_id = req.liquidate_unit_id
+        entity.status = Status.ACTIVE;
+        return entity;
+    }
+}
+
 
 export class OnboardConfig {
 

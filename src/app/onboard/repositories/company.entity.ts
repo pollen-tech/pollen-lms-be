@@ -1,4 +1,5 @@
 import {Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDateColumn,} from 'typeorm';
+import {Status} from "../../../common/enums/common.enum";
 
 @Entity('company')
 export class CompanyEntity {
@@ -19,7 +20,7 @@ export class CompanyEntity {
     liquidate_unit_id: number;
 
     @Column()
-    status: string;
+    status: Status;
 
     @CreateDateColumn({type: 'timestamptz'})
     created_at: Date;

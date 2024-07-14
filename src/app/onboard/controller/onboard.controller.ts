@@ -1,8 +1,8 @@
-import {Controller, Get} from '@nestjs/common';
+import {Body, Controller, Get, HttpCode, HttpStatus, Post} from '@nestjs/common';
 import {ApiTags} from '@nestjs/swagger';
 import {Public} from 'nest-keycloak-connect';
 import {OnboardCompanyService} from "../domain/onboard.company.service";
-import {OnboardConfig} from "../dto/onboard.dto";
+import {OnboardCompanyReqDto, OnboardConfig} from "../dto/onboard.dto";
 
 @ApiTags('Onboard-company')
 @Controller('onboard-company')
@@ -13,15 +13,33 @@ export class OnboardController {
     }
 
     @Get('/index')
+    @HttpCode(HttpStatus.OK)
     async helloIndex() {
         return {value: "Hello Onboard Company Index"}
     }
 
-
     @Get('/config')
     async getConfig() {
-        const values = OnboardConfig.getCompanyTypes()
-        return values;
+        const value = OnboardConfig.getCompanyTypes()
+        return value;
+    }
+
+    @Get('/company-type')
+    @HttpCode(HttpStatus.OK)
+    async getCompanyTypes() {
+        return this.onboardCompanyService.getActiveCompanyTypes();
+    }
+
+    @Get('/liquidate-unit')
+    @HttpCode(HttpStatus.OK)
+    async getLiquidateUnit() {
+        return this.onboardCompanyService.getActiveLiquidateUnits();
+    }
+
+    @Post()
+    @HttpCode(HttpStatus.CREATED)
+    async createCompany(@Body() request: OnboardCompanyReqDto) {
+        return this.onboardCompanyService.onboardNewCompany(request);
     }
 
 
