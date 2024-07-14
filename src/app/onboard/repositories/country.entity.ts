@@ -1,3 +1,4 @@
+/*
 import {Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDateColumn,} from 'typeorm';
 
 @Entity('users')
@@ -43,3 +44,4 @@ export class UserEntity {
     updated_at: Date;
 
 }
+*/
