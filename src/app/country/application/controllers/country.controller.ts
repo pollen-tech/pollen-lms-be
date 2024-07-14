@@ -7,11 +7,12 @@ import {CountryService} from 'src/app/country/domain/country.service';
 @Controller('countries')
 @Public()
 export class CountryController {
-  constructor(private readonly countryService: CountryService) { }
+    constructor(private readonly countryService: CountryService) {
+    }
 
-  @Get()
-  async getAllCountries() {
-    return this.countryService.getAllCountries();
-  }
+    @Get()
+    async getAllCountries() {
+        return this.countryService.getActiveCountries();
+    }
 
 }

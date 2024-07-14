@@ -18,12 +18,6 @@ export class OnboardController {
         return {value: "Hello Onboard Company Index"}
     }
 
-    @Get('/config')
-    async getConfig() {
-        const value = OnboardConfig.getCompanyTypes()
-        return value;
-    }
-
     @Get('/company-type')
     @HttpCode(HttpStatus.OK)
     async getCompanyTypes() {

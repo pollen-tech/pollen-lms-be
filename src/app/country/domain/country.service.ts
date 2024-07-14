@@ -1,22 +1,18 @@
 import {Injectable,} from '@nestjs/common';
 import {CountryRepository} from '../infrastructure/repositories/country.repository';
+import {Status} from "../../../common/enums/common.enum";
 
 @Injectable()
 export class CountryService {
-  constructor(
-    private readonly countryRepository: CountryRepository
-  ) { }
+    constructor(private readonly countryRepository: CountryRepository) {
+    }
 
-  countrySelect = {
-    id: true,
-    name: true
-  };
+    countrySelect = {
+        status: Status.ACTIVE
+    };
 
-  async getAllCountries() {
-    const countries = await this.countryRepository.find({
-      select: this.countrySelect,
-    });
-    return countries;
-  }
+    async getActiveCountries() {
+        return await this.countryRepository.find({where: {status: Status.ACTIVE}});
+    }
 
 }
