@@ -15,7 +15,6 @@ const configGetters = [PostgresConfigGetter, KeycloakConfigGetter];
       validationSchema: Joi.object({
         API_PORT: Joi.number().default(3001),
         ...PostgresConfigGetter.validationSchema,
-        ...KeycloakConfigGetter.validationSchema,
       }),
     }),
   ],

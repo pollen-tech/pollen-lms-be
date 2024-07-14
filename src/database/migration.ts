@@ -5,7 +5,7 @@ import { runSeeders } from 'typeorm-extension';
 import { DatabaseModule } from './database.module';
 import { getTypeOrmConfig } from './typeorm-config';
 
-export const getTypeOrmInstace = async () => {
+export const getTypeOrmInstance = async () => {
   const app = await NestFactory.create(DatabaseModule.forRoot());
   const config = app.get(PostgresConfigGetter);
   const ormConfig = new DataSource(
@@ -15,17 +15,17 @@ export const getTypeOrmInstace = async () => {
 };
 
 export async function runMigrations() {
-  const typeorm = await getTypeOrmInstace();
+  const typeorm = await getTypeOrmInstance();
   await typeorm.runMigrations();
 }
 
 export async function runSeeds() {
-  const typeorm = await getTypeOrmInstace();
+  const typeorm = await getTypeOrmInstance();
   await runSeeders(typeorm);
 }
 
 export async function revertMigration() {
-  const typeorm = await getTypeOrmInstace();
+  const typeorm = await getTypeOrmInstance();
   await typeorm.undoLastMigration();
 }
 
