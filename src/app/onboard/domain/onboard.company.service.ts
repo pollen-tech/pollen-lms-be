@@ -32,6 +32,7 @@ export class OnboardCompanyService {
 
     async onboardNewCompany(reqDto: OnboardCompanyReqDto) {
         let savedCompany = await this.createCompany(reqDto);
+        console.log("Logging savedCompany - ", savedCompany)
         await this.createCompanyUser(savedCompany.id, reqDto.user_id);
         return savedCompany;
     }
@@ -39,6 +40,8 @@ export class OnboardCompanyService {
     async createCompany(reqDto: OnboardCompanyReqDto): Promise<OnboardCompanyResDto> {
         const entity = OnboardCompanyMapper.toCompanyEntity(reqDto);
         const saved = await this.companyRepository.save(entity);
+        console.log("Logging saved 1 - ", entity)
+        console.log("Logging saved 2 - ", saved)
         let res = {...reqDto};
         res.id = saved.id;
         return res;
@@ -46,6 +49,7 @@ export class OnboardCompanyService {
 
     async createCompanyUser(company_id: string, user_id: string) {
         let entity = {status: Status.ACTIVE, company_id, user_id,};
+        console.log("Logging - ", entity)
         const saved = await this.companyUserRepository.save(entity);
         return saved;
     }

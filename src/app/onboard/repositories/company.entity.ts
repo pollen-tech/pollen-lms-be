@@ -1,10 +1,10 @@
-import {Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDateColumn,} from 'typeorm';
+import {Column, CreateDateColumn, Entity, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn,} from 'typeorm';
 import {Status} from "../../../common/enums/common.enum";
 
 @Entity('company')
 export class CompanyEntity {
 
-    @PrimaryColumn({type: 'uuid'})
+    @PrimaryGeneratedColumn()
     id: string;
 
     @Column()
